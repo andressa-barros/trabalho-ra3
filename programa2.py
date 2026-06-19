@@ -1,35 +1,25 @@
 from itertools import combinations
-from utils import gerar_combinacoes  # importa do programa1.py
+from utils import gerar_combinacoes
 
-def resolver_cobertura_14():
-    # algoritmo guloso para cobertura de S_14 com S_15.
-  
-    print("Iniciando Programa 2: Cobertura de 14 elementos...")
+def resolver_cobertura(p_alvo, p_fonte=15):
+    print(f"Iniciando Cobertura de {p_alvo} elementos com {p_fonte}...")
     
-    # 1. definir o conjunto alvo (todas as combinações de 14)
-    # usamos set para busca rápida (O(1))
-    alvo = set(gerar_combinacoes(25, 14))
+    alvo = set(gerar_combinacoes(25, p_alvo))
     coberto = set()
-    sb_15_14 = [] # subconjunto de cobertura
+    subconjunto_cobertura = []
     
-    # 2. algoritmo guloso
-    # iteramos sobre S_15
-    for combo_15 in gerar_combinacoes(25, 15):
-        # gera todas as sub-combinações de 14 dentro desta de 15
-        sub_14 = set(combinations(combo_15, 14))
+    for combo in gerar_combinacoes(25, p_fonte):
+        sub_alvos = set(combinations(combo, p_alvo))
         
-        # se essa combo de 15 cobre algo que ainda não foi coberto
-        if not sub_14.issubset(coberto):
-            sb_15_14.append(combo_15)
-            coberto.update(sub_14)
+        if not sub_alvos.issubset(coberto):
+            subconjunto_cobertura.append(combo)
+            coberto.update(sub_alvos)
             
-        # critério de parada: se cobrimos tudo, para
         if len(coberto) == len(alvo):
             break
             
-    print(f"Cobertura concluída!")
-    print(f"Tamanho do subconjunto SB_15_14: {len(sb_15_14)}")
-    return sb_15_14
+    print(f"Tamanho do SB_15_{p_alvo}: {len(subconjunto_cobertura)}")
+    return subconjunto_cobertura
 
 if __name__ == "__main__":
-    resolver_cobertura_14()
+    resolver_cobertura(14)
