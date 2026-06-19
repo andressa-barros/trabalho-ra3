@@ -13,9 +13,9 @@ def gerar_combinacoes(n, p):
 
 def estimar_memoria_materializada(n, p):
     # estima RAM necessária se usássemos uma lista (apenas para justificativa).
-    
     qtd = math.comb(n, p)
-    tamanho_tupla = sys.getsizeof(tuple(range(p)))
+    amostra = tuple(range(p))
+    tamanho_tupla = sys.getsizeof(amostra) + sum(sys.getsizeof(x) for x in amostra)
     mb = (qtd * tamanho_tupla) / (1024 ** 2)
     return qtd, mb
 
