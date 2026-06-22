@@ -2,11 +2,10 @@ import time
 from utils import gerar_combinacoes
 from itertools import combinations
 
-def resolver_cobertura_p2(p_alvo=14, p_fonte=15):
+def resolver_cobertura_p5(p_alvo=11, p_fonte=15):
     print(f"Iniciando Cobertura de {p_alvo} elementos com {p_fonte}...")
-    
-    #mesma coisa do Programa 3, mas adaptada para alvo de 14 elementos (falta 1 para completar 15)
-    #o resto igual
+#mesma coisa do Programa 3, mas adaptada para alvo de 11 elementos (faltam 4 para completar 15)
+#o resto msm coisa
     combinacoes_ja_cobertas = set()
     
     subconjunto_cobertura = []
@@ -40,7 +39,7 @@ def resolver_cobertura_p2(p_alvo=14, p_fonte=15):
 if __name__ == "__main__":
     inicio = time.time()
 
-    resultado_programa2 = resolver_cobertura_p2(14)
+    resultado_programa5 = resolver_cobertura_p5(11)
     
     tempo_total = time.time() - inicio
-    print(f"Tempo de execução do Programa 2: {tempo_total:.4f}s")
+    print(f"Tempo de execução do Programa 5: {tempo_total:.4f}s")
