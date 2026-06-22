@@ -24,7 +24,7 @@ def resolver_cobertura_p2(p_alvo=14, p_fonte=15):
         
         qtd_faltante = p_fonte - p_alvo
         
-        elementos_adicionais = list(elementos_disponiveis)[:qtd_faltante]
+        elementos_adicionais = sorted(list(elementos_disponiveis))[:qtd_faltante]
 
         novo_x = tuple(sorted(list(elementos_y) + elementos_adicionais))
         

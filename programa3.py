@@ -31,7 +31,7 @@ def resolver_cobertura(p_alvo, p_fonte=15):
         qtd_faltante = p_fonte - p_alvo
         
         # Pega os 2 primeiros números que estão sobrando para usar
-        elementos_adicionais = list(elementos_disponiveis)[:qtd_faltante]
+        elementos_adicionais = sorted(list(elementos_disponiveis))[:qtd_faltante]
 
         # Junta os 13 números originais com os 2 novos, criando nossa combinação de 15!
         novo_x = tuple(sorted(list(elementos_y) + elementos_adicionais))
