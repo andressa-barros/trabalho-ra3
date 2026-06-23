@@ -1,10 +1,13 @@
 import time
+import tracemalloc
 from utils import gerar_combinacoes
 from itertools import combinations
 
 def resolver_cobertura(p_alvo, p_fonte=15):
     print(f"Iniciando Cobertura de {p_alvo} elementos com {p_fonte}...")
 
+# 1. Inicia a medição de memória
+    tracemalloc.start()
     # "Caderninho" rápido que anota as combinações que já resolvemos
     combinacoes_ja_cobertas = set()
     
@@ -47,6 +50,20 @@ def resolver_cobertura(p_alvo, p_fonte=15):
 
     # Avisa quantas combinações de 15 a gente precisou criar no total
     print(f"Tamanho final do SB_{p_fonte},{p_alvo}: {len(subconjunto_cobertura)}")
+
+    # 2. Coleta os dados de consumo de memória ANTES de limpar as estruturas
+    atual, pico = tracemalloc.get_traced_memory()
+    
+    ram_atual_mb = atual / (1024 * 1024)
+    ram_pico_mb = pico / (1024 * 1024)
+    
+    print(f"\n{'='*40}")
+    print(f"RAM atual: {ram_atual_mb:.2f} MB; RAM pico: {ram_pico_mb:.2f} MB")    
+    print(f"{'='*40}\n")
+
+    # 3. Limpeza explícita para ajudar o Garbage Collector
+    del combinacoes_ja_cobertas
+    tracemalloc.stop()
     
     # Entrega a resposta final
     return subconjunto_cobertura
